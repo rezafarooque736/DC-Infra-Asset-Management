@@ -1,0 +1,6 @@
+flask==2.2.2
+psycopg2==2.9.5
+pandas==1.5.1
+XlsxWriter==3.0.3
+python-dotenv
+Flask-Mail==0.9.1

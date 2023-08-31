@@ -1,0 +1,51 @@
+{% extends 'base.html' %} {% block title %}RailTel | Login{% endblock %} {% block main %}
+
+<header class="p-0 px-md-4 mb-3 border-bottom" style="background-color: #ccecf9">
+	<div class="container-fluid">
+		<div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+			<a class="navbar-brand" href="/"><img src="/static/images/railtel-logo-vertical.png" alt="RailTel" width="50px" height="70px" class="d-inline-block align-text-top" /></a>
+
+			<ul class="nav col-12 col-md-5 me-auto mb-2 justify-content-center mb-md-0" style="font-size: 19px; width: 130px">
+				<li><a href="/hardware-appliances-provisioning" class="header-list-text homei">Home</a></li>
+			</ul>
+		</div>
+	</div>
+</header>
+<br clear="all" />
+
+<div style="width: 400px; background-color: #ccecf9" class="d-md-block d-flex mx-auto justify-content-center text-center container">
+	<div class="card" style="margin-top: 25%; border-radius: 15px">
+		<div class="card-body">
+			<h4 style="font-weight: 600">Sign In Here!</h4>
+			<form action="{{ url_for('login') }}" method="post" class="form-group">
+				<div class="form-floating mb-3">
+					<input type="text" class="form-control" name="username" placeholder="Username or Email Id" required />
+					<label for="floatingInput">Phone number, username or email</label>
+				</div>
+				<div class="form-floating mb-3">
+					<input type="password" name="password" class="form-control" placeholder="Password" required />
+					<label for="floatingPassword">Password</label>
+				</div>
+				<input type="submit" value="Sign in" class="btn-talos mb-3" />
+			</form>
+			<p class="mt-2 text-center"><a href="{{ url_for('forgot') }}" class="text-decoration-none textStyle">Forgot Password?</a></p>
+			<hr />
+			{% for message in get_flashed_messages() %}
+			<div class="container text-center">
+				<div class="py-3 text-danger">{{ message }}</div>
+			</div>
+			{% endfor %}
+			<p>Not a member? <a href="{{ url_for('newUser') }}" class="text-decoration-none textStyle">Create New Account</a></p>
+		</div>
+	</div>
+</div>
+<script type="text/javascript">
+	function preventBack() {
+		window.history.forward();
+	}
+	setTimeout("preventBack()", 0);
+	window.onunload = function () {
+		null;
+	};
+</script>
+{% endblock %}

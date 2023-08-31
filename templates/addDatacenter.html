@@ -1,0 +1,379 @@
+{% extends 'base.html' %} {% block title %}RailTel | Show Data{% endblock %} {%
+block main %}
+<header
+  class="p-0 px-md-4 border-bottom"
+  style="background-color: #ccecf9; position: sticky; top: 0"
+>
+  <div class="container-fluid">
+    <div
+      class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start"
+    >
+      <a class="navbar-brand" href="/"
+        ><img
+          src="/static/images/railtel-logo-vertical.png"
+          alt="RailTel"
+          width="50px"
+          height="70px"
+          class="d-inline-block align-text-top"
+      /></a>
+
+      <ul
+        class="nav col-12 col-md-5 me-auto mb-2 justify-content-center mb-md-0"
+        style="font-size: 19px; width: 533px"
+      >
+        <li>
+          <a
+            href="/hardware-appliances-provisioning"
+            class="header-list-text fw-bold homei"
+            >Home</a
+          >
+        </li>
+        <li>
+          <a href="/loginHistory" class="header-list-text lh">Login History</a>
+        </li>
+        <li>
+          <a href="{{url_for('deleted_data')}}" class="header-list-text dd"
+            >Deleted Data</a
+          >
+        </li>
+        <li class="nav-item dropdown float-end header-list-text dld">
+          Download
+          <div class="dropdown-content text-start">
+            <a href="/download-dc-all/0">Data Center (All)</a>
+            <a href="/download-dc-all/1">Row 1 (only)</a>
+            <a href="/download-dc-all/2">Row 2 (only)</a>
+            <a href="/download-dc-all/3">Row 3 (only)</a>
+            <a href="/download-dc-all/4">Row 4 (only)</a>
+            <a href="/download-dc-all/5">Row 5 (only)</a>
+            <a href="/download-dc-all/6" class="mb-2">Row 6 (only)</a>
+          </div>
+        </li>
+      </ul>
+
+      <div class="col-12 col-lg-auto mb-3 mb-lg-0 me-3" role="search">
+        <input
+          id="myInput2"
+          type="search"
+          class="form-control"
+          placeholder="Type here to Search..."
+          aria-label="Search"
+          name="search"
+        />
+      </div>
+      <a
+        class="btn-talos text-end text-center mt-0"
+        style="width: 110px; height: 40px"
+        href="/logout"
+        role="button"
+        >Sign out</a
+      >
+    </div>
+  </div>
+</header>
+<br clear="all" />
+
+<div class="text-center text-wrap fs-3 fw-bold mb-3">
+  <span style="color: #455a77">GGN DC - Server Farm - Add New Details</span>
+</div>
+
+<div
+  align="center"
+  style="width: 650px"
+  class="mt-1 d-md-block d-flex gap-2 mx-auto justify-content-center text-center"
+>
+  <div style="border: 1px solid #2980b9">
+    <form
+      action="/addDatacenter"
+      method="post"
+      enctype="multipart/form-data"
+      class="form pb-3"
+    >
+      <div class="row mx-0 mt-2">
+        <div class="col mt-2 text-start">
+          <label for="row">Row No.<span class="text-red">*</span></label><br />
+        </div>
+        <div class="col me-2 p-0">
+          <select
+            name="row"
+            id="row"
+            class="form-select form-control"
+            aria-label="Region"
+            required
+          >
+            <option value="" disabled selected>Select</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="row mx-0 mt-2">
+        <div class="col mt-2 text-start">
+          <label for="rack">Rack No.<span class="text-red">*</span></label><br />
+        </div>
+        <div class="col me-2 p-0">
+          <select
+            name="rack"
+            id="rack"
+            class="form-select form-control"
+            aria-label="Region"
+            required
+          >
+            <option value="" disabled selected>Select</option>
+            <option value="0">0 (Network Asset Only)</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+            <option value="7">7</option>
+            <option value="8">8</option>
+            <option value="9">9</option>
+            <option value="10">10</option>
+            <option value="11">11</option>
+            <option value="12">12</option>
+            <option value="13">13</option>
+            <option value="14">14</option>
+            <option value="15">15</option>
+            <option value="16">16</option>
+            <option value="17">17</option>
+            <option value="18">18</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="row mx-0 mt-2">
+        <div class="col mt-2 text-start">
+          <label for="service_type">Service Type <span class="text-red">*</span></label><br />
+        </div>
+        <div class="col me-2 p-0">
+          <select
+            name="service_type"
+            id="service_type"
+            class="form-select form-control"
+            aria-label="Region"
+            required
+          >
+            <option value="" disabled selected>Select</option>
+            <option value="RailTel Internal">RailTel Internal</option>
+            <option value="Network Asset">Network Asset</option>
+            <option value="Colocation">Colocation</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="row mx-0 mt-2">
+        <div class="col mt-2 text-start">
+          <label for="customer_name">Customer Name <span class="text-red">*</span></label><br />
+        </div>
+        <div class="col me-2 p-0">
+          <input
+            type="text"
+            class="form-control"
+            name="customer_name"
+            id="customer_name"
+            placeholder="Enter Customer Name"
+            required
+          />
+        </div>
+      </div>
+
+      <div class="row mx-0 mt-2">
+        <div class="col mt-2 text-start">
+          <label for="customer_project">Customer Project <span class="text-red">*</span></label><br />
+        </div>
+        <div class="col me-2 p-0">
+          <input
+            type="text"
+            class="form-control"
+            name="customer_project"
+            id="customer_project"
+            placeholder="Enter Customer Project"
+            required
+          />
+        </div>
+      </div>
+
+      <div class="row mx-0 mt-2">
+        <div class="col mt-2 text-start">
+          <label for="ci_type">CI Type</label><br />
+        </div>
+        <div class="col me-2 p-0">
+          <input
+            type="text"
+            class="form-control"
+            name="ci_type"
+            id="ci_type"
+            placeholder="CI Type"
+          />
+        </div>
+      </div>
+
+      <div class="row mx-0 mt-2">
+        <div class="col mt-2 text-start">
+          <label for="asset_tag">Asset Tag</label><br />
+        </div>
+        <div class="col me-2 p-0">
+          <input
+            type="text"
+            class="form-control"
+            name="asset_tag"
+            id="asset_tag"
+            placeholder="Asset Tag"
+          />
+        </div>
+      </div>
+
+      <div class="row mx-0 mt-2">
+        <div class="col mt-2 text-start">
+          <label for="oem">OEM</label><br />
+        </div>
+        <div class="col me-2 p-0">
+          <input
+            type="text"
+            class="form-control"
+            name="oem"
+            id="oem"
+            placeholder="OEM"
+          />
+        </div>
+      </div>
+
+      <div class="row mx-0 mt-2">
+        <div class="col mt-2 text-start">
+          <label for="model">Model</label><br />
+        </div>
+        <div class="col me-2 p-0">
+          <input
+            type="text"
+            class="form-control"
+            name="model"
+            id="model"
+            placeholder="Model"
+          />
+        </div>
+      </div>
+
+      <div class="row mx-0 mt-2">
+        <div class="col mt-2 text-start">
+          <label for="serial_number">Serial Number</label><br />
+        </div>
+        <div class="col me-2 p-0">
+          <input
+            type="text"
+            class="form-control"
+            name="serial_number"
+            id="serial_number"
+            placeholder="Serial Number"
+          />
+        </div>
+      </div>
+
+      <div class="row mx-0 mt-2">
+        <div class="col mt-2 text-start">
+          <label for="hostname">Hostname</label><br />
+        </div>
+        <div class="col me-2 p-0">
+          <input
+            type="text"
+            class="form-control"
+            name="hostname"
+            id="hostname"
+            placeholder="Hostname"
+          />
+        </div>
+      </div>
+
+      <div class="row mx-0 mt-2">
+        <div class="col mt-2 text-start">
+          <label for="ip_mgmt">IP Mgmt</label><br />
+        </div>
+        <div class="col me-2 p-0">
+          <input
+            type="text"
+            class="form-control"
+            name="ip_mgmt"
+            id="ip_mgmt"
+            placeholder="IP Mgmt"
+          />
+        </div>
+      </div>
+
+      <div class="row mx-0 mt-2">
+        <div class="col mt-2 text-start">
+          <label for="ipmi_ilo">IPMI ILO</label><br />
+        </div>
+        <div class="col me-2 p-0">
+          <input
+            type="text"
+            class="form-control"
+            name="ipmi_ilo"
+            id="ipmi_ilo"
+            placeholder="IPMI ILO"
+          />
+        </div>
+      </div>
+
+      <div class="row mx-0 mt-2">
+        <div class="col mt-2 text-start">
+          <label for="amc_start_date">AMC Start Date</label><br />
+        </div>
+        <div class="col me-2 p-0">
+          <input
+            type="date"
+            class="form-control"
+            name="amc_start_date"
+            id="amc_start_date"
+            placeholder="AMC Start Date"
+          />
+        </div>
+      </div>
+
+      <div class="row mx-0 mt-2">
+        <div class="col mt-2 text-start">
+          <label for="amc_end_date">AMC End Date</label><br />
+        </div>
+        <div class="col me-2 p-0">
+          <input
+            type="date"
+            class="form-control"
+            name="amc_end_date"
+            id="amc_end_date"
+            placeholder="AMC End Date"
+          />
+        </div>
+      </div>
+
+      <div class="row mx-0 mt-2">
+        <div class="col mt-2 text-start">
+          <label for="remark">Remark</label><br />
+        </div>
+        <div class="col me-2 p-0">
+          <input
+            type="text"
+            class="form-control"
+            name="remark"
+            id="remark"
+            placeholder="Remark"
+          />
+        </div>
+      </div>
+
+      <button
+        type="submit"
+        id="submit_button"
+        style="width: 170px"
+        class="btn-talos"
+      >
+        Submit
+      </button>
+    </form>
+  </div>
+</div>
+
+{% endblock %}

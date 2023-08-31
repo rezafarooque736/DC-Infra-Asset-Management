@@ -1,0 +1,69 @@
+{% extends 'base.html' %} {% block title %}RailTel | Login History{% endblock %} {% block main %}
+
+<header class="p-0 px-md-4 border-bottom" style="background-color: #ccecf9">
+	<div class="container-fluid">
+		<div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+			<a class="navbar-brand" href="/"><img src="/static/images/railtel-logo-vertical.png" alt="RailTel" width="50px" height="70px" class="d-inline-block align-text-top" /></a>
+
+			<ul class="nav col-12 col-md-5 me-auto mb-2 justify-content-center mb-md-0" style="font-size: 19px; width: 533px">
+				<li><a href="/hardware-appliances-provisioning" class="header-list-text fw-bold homei">Home</a></li>
+				<li><a href="/loginHistory" class="header-list-text lh">Login History</a></li>
+				<li><a href="{{url_for('deleted_data')}}" class="header-list-text dd">Deleted Data</a></li>
+				<li class="nav-item dropdown float-end header-list-text dld">
+					Download
+					<div class="dropdown-content text-start">
+						<a href="/download-dc-all/0">Data Center (All)</a>
+						<a href="/download-dc-all/1">Row 1 (only)</a>
+						<a href="/download-dc-all/2">Row 2 (only)</a>
+						<a href="/download-dc-all/3">Row 3 (only)</a>
+						<a href="/download-dc-all/4">Row 4 (only)</a>
+						<a href="/download-dc-all/5">Row 5 (only)</a>
+						<a href="/download-dc-all/6" class="mb-2">Row 6 (only)</a>
+					</div>
+				</li>
+			</ul>
+
+			<div class="col-12 col-lg-auto mb-3 mb-lg-0 me-3" role="search">
+				<input id="myInput2" type="search" class="form-control" placeholder="Type here to Search..." aria-label="Search" name="search" />
+			</div>
+			<a class="btn-talos text-end text-center mt-0" style="width: 110px; height: 40px" href="/logout" role="button">Sign out</a>
+		</div>
+	</div>
+</header>
+<br clear="all" />
+
+<div style="overflow-x: auto; margin-bottom: 50px">
+	<table class="reportTable2 mb-3">
+		<thead>
+			<tr>
+				<th scope="col" width="23%" class="tableHead text-start ps-3">Name</th>
+				<th scope="col" width="20%" class="tableHead text-start">Mobile Number</th>
+				<th scope="col" width="35%" class="tableHead text-start">Email Address</th>
+				<th scope="col" width="20%" class="tableHead text-start">Date & Time</th>
+			</tr>
+		</thead>
+		<tbody id="myTbody2">
+			{% for row in user_details %}
+			<tr class="tableRow">
+				<td class="tableData ps-3">{{row[1]}}</td>
+				<td class="tableData">{{row[2]}}</td>
+				<td class="tableData">{{row[3]}}</td>
+				<td class="tableData">{{row[4]}}</td>
+			</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+</div>
+<br clear="all" />
+
+<script>
+	$(document).ready(function () {
+		$("#myInput2").on("keyup", function () {
+			var value = $(this).val().toLowerCase();
+			$("#myTbody2 tr").filter(function () {
+				$(this).toggle($(this).text().toLowerCase().indexOf(value) > -1);
+			});
+		});
+	});
+</script>
+{% endblock %}
