@@ -3,36 +3,19 @@
 
 <header class="p-0 px-md-4 border-bottom" style="background-color: #ccecf9">
   <div class="container-fluid">
-    <div
-      class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start"
-    >
-      <a class="navbar-brand" href="/"
-        ><img
-          src="/static/images/railtel-logo-vertical.png"
-          alt="RailTel"
-          width="50px"
-          height="70px"
-          class="d-inline-block align-text-top"
-      /></a>
+    <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+      <a class="navbar-brand" href="/"><img src="/static/images/railtel-logo-vertical.png" alt="RailTel" width="50px"
+          height="70px" class="d-inline-block align-text-top" /></a>
 
-      <ul
-        class="nav col-12 col-md-5 me-auto mb-2 justify-content-center mb-md-0"
-        style="font-size: 19px; width: 533px"
-      >
+      <ul class="nav col-12 col-md-5 me-auto mb-2 justify-content-center mb-md-0" style="font-size: 19px; width: 533px">
         <li>
-          <a
-            href="/hardware-appliances-provisioning"
-            class="header-list-text fw-bold homei"
-            >Home</a
-          >
+          <a href="/login" class="header-list-text fw-bold homei">Home</a>
         </li>
         <li>
           <a href="/loginHistory" class="header-list-text lh">Login History</a>
         </li>
         <li>
-          <a href="{{url_for('deleted_data')}}" class="header-list-text dd"
-            >Deleted Data</a
-          >
+          <a href="{{url_for('deleted_data')}}" class="header-list-text dd">Deleted Data</a>
         </li>
         <li class="nav-item dropdown float-end header-list-text dld">
           Download
@@ -49,22 +32,11 @@
       </ul>
 
       <div class="col-12 col-lg-auto mb-3 mb-lg-0 me-3" role="search">
-        <input
-          id="myInput2"
-          type="search"
-          class="form-control"
-          placeholder="Type here to Search..."
-          aria-label="Search"
-          name="search"
-        />
+        <input id="myInput2" type="search" class="form-control" placeholder="Type here to Search..." aria-label="Search"
+          name="search" />
       </div>
-      <a
-        class="btn-talos text-end text-center mt-0"
-        style="width: 110px; height: 40px"
-        href="/logout"
-        role="button"
-        >Sign out</a
-      >
+      <a class="btn-talos text-end text-center mt-0" style="width: 110px; height: 40px" href="/logout"
+        role="button">Sign out</a>
     </div>
   </div>
 </header>
@@ -73,31 +45,16 @@
 <div class="text-center text-wrap fs-2 fw-bold mb-3">
   <span style="color: #455a77">Update Data Center Management Details</span>
 </div>
-<div
-  align="center"
-  style="width: 650px"
-  class="mt-1 d-md-block d-flex gap-2 mx-auto justify-content-center text-center"
->
+<div align="center" style="width: 650px"
+  class="mt-1 d-md-block d-flex gap-2 mx-auto justify-content-center text-center">
   <div style="border: 1px solid #2980b9">
-    <form
-      action="/updateDataCenter/{{sno1}}"
-      method="post"
-      enctype="multipart/form-data"
-      class="form pb-3"
-    >
+    <form action="/updateDataCenter/{{sno1}}" method="post" enctype="multipart/form-data" class="form pb-3">
       <div class="row mx-0 mt-2">
         <div class="col mt-2 text-start">
-          <label for="row">Row No.<span class="text-red">*</span></label
-          ><br />
+          <label for="row">Row No.<span class="text-red">*</span></label><br />
         </div>
         <div class="col me-2 p-0">
-          <select
-            name="row"
-            id="row"
-            class="form-select form-control"
-            aria-label="row"
-            required
-          >
+          <select name="row" id="row" class="form-select form-control" aria-label="row" required>
             <option value="" disabled selected>Select Row</option>
             <option value="1">1</option>
             <option value="2">2</option>
@@ -110,17 +67,10 @@
       </div>
       <div class="row mx-0 mt-2">
         <div class="col mt-2 text-start">
-          <label for="rack">Rack No.<span class="text-red">*</span></label
-          ><br />
+          <label for="rack">Rack No.<span class="text-red">*</span></label><br />
         </div>
         <div class="col me-2 p-0">
-          <select
-            name="rack"
-            id="rack"
-            class="form-select form-control"
-            aria-label="rack"
-            required
-          >
+          <select name="rack" id="rack" class="form-select form-control" aria-label="rack" required>
             <option value="" disabled selected>Select Rack</option>
             <option value="0">0 (Network Asset Only)</option>
             <option value="1">1</option>
@@ -146,18 +96,11 @@
       </div>
       <div class="row mx-0 mt-2">
         <div class="col mt-2 text-start">
-          <label for="service_type"
-            >Select Service Type <span class="text-red">*</span></label
-          ><br />
+          <label for="service_type">Select Service Type <span class="text-red">*</span></label><br />
         </div>
         <div class="col me-2 p-0">
-          <select
-            name="service_type"
-            id="service_type"
-            class="form-select form-control"
-            aria-label="service_type"
-            required
-          >
+          <select name="service_type" id="service_type" class="form-select form-control" aria-label="service_type"
+            required>
             <option value="" disabled selected>Service Type</option>
             <option value="RailTel Internal">RailTel Internal</option>
             <option value="Network Asset">Network Asset</option>
@@ -167,36 +110,20 @@
       </div>
       <div class="row mx-0 mt-2">
         <div class="col mt-2 text-start">
-          <label for="customer_name"
-            >Customer Name / Owner <span class="text-red">*</span></label
-          ><br />
+          <label for="customer_name">Customer Name / Owner <span class="text-red">*</span></label><br />
         </div>
         <div class="col me-2 p-0">
-          <input
-            type="text"
-            class="form-control"
-            name="customer_name"
-            id="customer_name"
-            placeholder="Enter Customer Name"
-            required
-          />
+          <input type="text" class="form-control" name="customer_name" id="customer_name"
+            placeholder="Enter Customer Name" required />
         </div>
       </div>
       <div class="row mx-0 mt-2">
         <div class="col mt-2 text-start">
-          <label for="customer_project"
-            >Customer Project <span class="text-red">*</span></label
-          ><br />
+          <label for="customer_project">Customer Project <span class="text-red">*</span></label><br />
         </div>
         <div class="col me-2 p-0">
-          <input
-            type="text"
-            class="form-control"
-            name="customer_project"
-            id="customer_project"
-            placeholder="Enter Customer Project"
-            required
-          />
+          <input type="text" class="form-control" name="customer_project" id="customer_project"
+            placeholder="Enter Customer Project" required />
         </div>
       </div>
       <div class="row mx-0 mt-2">
@@ -204,13 +131,7 @@
           <label for="ci_type">CI Type</label><br />
         </div>
         <div class="col me-2 p-0">
-          <input
-            type="text"
-            class="form-control"
-            name="ci_type"
-            id="ci_type"
-            placeholder="Enter CI Type"
-          />
+          <input type="text" class="form-control" name="ci_type" id="ci_type" placeholder="Enter CI Type" />
         </div>
       </div>
       <div class="row mx-0 mt-2">
@@ -218,13 +139,7 @@
           <label for="asset_tag">Asset Tag</label><br />
         </div>
         <div class="col me-2 p-0">
-          <input
-            type="text"
-            class="form-control"
-            name="asset_tag"
-            id="asset_tag"
-            placeholder="Enter Asset Tag"
-          />
+          <input type="text" class="form-control" name="asset_tag" id="asset_tag" placeholder="Enter Asset Tag" />
         </div>
       </div>
       <div class="row mx-0 mt-2">
@@ -232,13 +147,7 @@
           <label for="oem">OEM</label><br />
         </div>
         <div class="col me-2 p-0">
-          <input
-            type="text"
-            class="form-control"
-            name="oem"
-            id="oem"
-            placeholder="Enter OEM"
-          />
+          <input type="text" class="form-control" name="oem" id="oem" placeholder="Enter OEM" />
         </div>
       </div>
       <div class="row mx-0 mt-2">
@@ -246,13 +155,7 @@
           <label for="model">Model</label><br />
         </div>
         <div class="col me-2 p-0">
-          <input
-            type="text"
-            class="form-control"
-            name="model"
-            id="model"
-            placeholder="Enter Model"
-          />
+          <input type="text" class="form-control" name="model" id="model" placeholder="Enter Model" />
         </div>
       </div>
       <div class="row mx-0 mt-2">
@@ -260,13 +163,8 @@
           <label for="serial_number">Serial Number</label><br />
         </div>
         <div class="col me-2 p-0">
-          <input
-            type="text"
-            class="form-control"
-            name="serial_number"
-            id="serial_number"
-            placeholder="Enter Serial Number"
-          />
+          <input type="text" class="form-control" name="serial_number" id="serial_number"
+            placeholder="Enter Serial Number" />
         </div>
       </div>
       <div class="row mx-0 mt-2">
@@ -274,13 +172,7 @@
           <label for="hostname">Hostname</label><br />
         </div>
         <div class="col me-2 p-0">
-          <input
-            type="text"
-            class="form-control"
-            name="hostname"
-            id="hostname"
-            placeholder="Enter Hostname"
-          />
+          <input type="text" class="form-control" name="hostname" id="hostname" placeholder="Enter Hostname" />
         </div>
       </div>
       <div class="row mx-0 mt-2">
@@ -288,13 +180,7 @@
           <label for="ip_mgmt">IP (Mgmt)</label><br />
         </div>
         <div class="col me-2 p-0">
-          <input
-            type="text"
-            class="form-control"
-            name="ip_mgmt"
-            id="ip_mgmt"
-            placeholder="Enter IP (Mgmt)"
-          />
+          <input type="text" class="form-control" name="ip_mgmt" id="ip_mgmt" placeholder="Enter IP (Mgmt)" />
         </div>
       </div>
       <div class="row mx-0 mt-2">
@@ -302,13 +188,7 @@
           <label for="ipmi_ilo">IPMI ILO</label><br />
         </div>
         <div class="col me-2 p-0">
-          <input
-            type="text"
-            class="form-control"
-            name="ipmi_ilo"
-            id="ipmi_ilo"
-            placeholder="Enter IPMI ILO"
-          />
+          <input type="text" class="form-control" name="ipmi_ilo" id="ipmi_ilo" placeholder="Enter IPMI ILO" />
         </div>
       </div>
       <div class="row mx-0 mt-2">
@@ -316,13 +196,8 @@
           <label for="amc_start_date">AMC Start Date</label><br />
         </div>
         <div class="col me-2 p-0">
-          <input
-            type="date"
-            class="form-control px-0"
-            name="amc_start_date"
-            id="amc_start_date"
-            placeholder="Enter AMC Start Date"
-          />
+          <input type="date" class="form-control px-0" name="amc_start_date" id="amc_start_date"
+            placeholder="Enter AMC Start Date" />
         </div>
       </div>
       <div class="row mx-0 mt-2">
@@ -330,13 +205,8 @@
           <label for="amc_end_date">AMC End Date</label><br />
         </div>
         <div class="col me-2 p-0">
-          <input
-            type="date"
-            class="form-control px-0"
-            name="amc_end_date"
-            id="amc_end_date"
-            placeholder="Enter AMC End Date"
-          />
+          <input type="date" class="form-control px-0" name="amc_end_date" id="amc_end_date"
+            placeholder="Enter AMC End Date" />
         </div>
       </div>
       <div class="row mx-0 mt-2">
@@ -344,21 +214,10 @@
           <label for="remark">Remark</label><br />
         </div>
         <div class="col me-2 p-0">
-          <textarea
-            name="remark"
-            class="form-control"
-            rows="3"
-            id="remark"
-            placeholder="Customer Remark"
-          ></textarea>
+          <textarea name="remark" class="form-control" rows="3" id="remark" placeholder="Customer Remark"></textarea>
         </div>
       </div>
-      <button
-        type="submit"
-        id="submit_button"
-        style="width: 170px"
-        class="btn-talos"
-      >
+      <button type="submit" id="submit_button" style="width: 170px" class="btn-talos">
         Submit
       </button>
     </form>

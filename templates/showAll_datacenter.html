@@ -1,40 +1,20 @@
 {% extends 'base.html' %} {% block title %}RailTel | Show Data{% endblock %} {%
 block main %}
-<header
-  class="p-0 px-md-4 border-bottom"
-  style="background-color: #ccecf9; position: sticky; top: 0"
->
+<header class="p-0 px-md-4 border-bottom" style="background-color: #ccecf9; position: sticky; top: 0">
   <div class="container-fluid">
-    <div
-      class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start"
-    >
-      <a class="navbar-brand" href="/"
-        ><img
-          src="/static/images/railtel-logo-vertical.png"
-          alt="RailTel"
-          width="50px"
-          height="70px"
-          class="d-inline-block align-text-top"
-      /></a>
+    <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+      <a class="navbar-brand" href="/"><img src="/static/images/railtel-logo-vertical.png" alt="RailTel" width="50px"
+          height="70px" class="d-inline-block align-text-top" /></a>
 
-      <ul
-        class="nav col-12 col-md-5 me-auto mb-2 justify-content-center mb-md-0"
-        style="font-size: 19px; width: 533px"
-      >
+      <ul class="nav col-12 col-md-5 me-auto mb-2 justify-content-center mb-md-0" style="font-size: 19px; width: 533px">
         <li>
-          <a
-            href="/hardware-appliances-provisioning"
-            class="header-list-text fw-bold homei"
-            >Home</a
-          >
+          <a href="/login" class="header-list-text fw-bold homei">Home</a>
         </li>
         <li>
           <a href="/loginHistory" class="header-list-text lh">Login History</a>
         </li>
         <li>
-          <a href="{{url_for('deleted_data')}}" class="header-list-text dd"
-            >Deleted Data</a
-          >
+          <a href="{{url_for('deleted_data')}}" class="header-list-text dd">Deleted Data</a>
         </li>
         <li class="nav-item dropdown float-end header-list-text dld">
           Download
@@ -51,22 +31,11 @@ block main %}
       </ul>
 
       <div class="col-12 col-lg-auto mb-3 mb-lg-0 me-3" role="search">
-        <input
-          id="myInput2"
-          type="search"
-          class="form-control"
-          placeholder="Type here to Search..."
-          aria-label="Search"
-          name="search"
-        />
+        <input id="myInput2" type="search" class="form-control" placeholder="Type here to Search..." aria-label="Search"
+          name="search" />
       </div>
-      <a
-        class="btn-talos text-end text-center mt-0"
-        style="width: 110px; height: 40px"
-        href="/logout"
-        role="button"
-        >Sign out</a
-      >
+      <a class="btn-talos text-end text-center mt-0" style="width: 110px; height: 40px" href="/logout"
+        role="button">Sign out</a>
     </div>
   </div>
 </header>
@@ -81,39 +50,20 @@ block main %}
     <div class="table-photo-descp-main">
       <div class="table-photo-descp">
         <span>RailTel Internal &nbsp;=&nbsp;</span>
-        <img
-          class="table-cell"
-          src="../static/images/railtel_internal.png"
-          alt="RailTel Internal"
-          title="RailTel Internal"
-        />
+        <img class="table-cell" src="../static/images/railtel_internal.png" alt="RailTel Internal"
+          title="RailTel Internal" />
       </div>
       <div class="table-photo-descp">
         <span>Network Asset &nbsp;=&nbsp;</span>
-        <img
-          class="table-cell"
-          src="../static/images/network.png"
-          alt="Network Asset"
-          title="Network Asset"
-        />
+        <img class="table-cell" src="../static/images/network.png" alt="Network Asset" title="Network Asset" />
       </div>
       <div class="table-photo-descp">
         <span>Colocation &nbsp;=&nbsp;</span>
-        <img
-          class="table-cell"
-          src="../static/images/colocation.png"
-          alt="Colocation"
-          title="Colocation"
-        />
+        <img class="table-cell" src="../static/images/colocation.png" alt="Colocation" title="Colocation" />
       </div>
       <div class="table-photo-descp">
         <span>Empty &nbsp;=&nbsp;</span>
-        <img
-          class="table-cell"
-          src="../static/images/empty.png"
-          alt="Empty"
-          title="Empty"
-        />
+        <img class="table-cell" src="../static/images/empty.png" alt="Empty" title="Empty" />
       </div>
     </div>
     <table class="mt-3">
@@ -121,11 +71,7 @@ block main %}
         <tr>
           <th scope="col" style="width: 100px" class="tableHead"></th>
           {% for rack in range(0,19) %}
-          <th
-            scope="col"
-            style="width: 100px; text-align: left"
-            class="tableHead"
-          >
+          <th scope="col" style="width: 100px; text-align: left" class="tableHead">
             Rack {{rack}}
           </th>
           {% endfor %}
@@ -138,75 +84,37 @@ block main %}
           <th scdope="row" class="tableHead table-row">Row {{row_data}}</th>
           {% if row_data == 3 %} {% for rack_data in range(0, 14) %}
           <td scope="row">
-            <a
-              href="/one-row-rack-details/{{row_data}}/{{rack_data}}"
-              target="_blank"
-            >
+            <a href="/one-row-rack-details/{{row_data}}/{{rack_data}}" target="_blank">
               {% if rack_details[count.value] == 'RailTel Internal' %}
-              <img
-                class="table-cell"
-                src="../static/images/railtel_internal.png"
-                alt="Row- {{row_data}}, Rack- {{rack_data}}"
-                title="Row- {{row_data}}, Rack- {{rack_data}}"
-              />
+              <img class="table-cell" src="../static/images/railtel_internal.png"
+                alt="Row- {{row_data}}, Rack- {{rack_data}}" title="Row- {{row_data}}, Rack- {{rack_data}}" />
               {% elif rack_details[count.value] == 'Colocation' %}
-              <img
-                class="table-cell"
-                src="../static/images/colocation.png"
-                alt="Row- {{row_data}}, Rack- {{rack_data}}"
-                title="Row- {{row_data}}, Rack- {{rack_data}}"
-              />
+              <img class="table-cell" src="../static/images/colocation.png" alt="Row- {{row_data}}, Rack- {{rack_data}}"
+                title="Row- {{row_data}}, Rack- {{rack_data}}" />
               {% elif rack_details[count.value] == 'Network Asset' %}
-              <img
-                class="table-cell"
-                src="../static/images/network.png"
-                alt="Row- {{row_data}}, Rack- {{rack_data}}"
-                title="Row- {{row_data}}, Rack- {{rack_data}}"
-              />
+              <img class="table-cell" src="../static/images/network.png" alt="Row- {{row_data}}, Rack- {{rack_data}}"
+                title="Row- {{row_data}}, Rack- {{rack_data}}" />
               {% else %}
-              <img
-                class="table-cell"
-                src="../static/images/empty.png"
-                alt="Row- {{row_data}}, Rack- {{rack_data}}"
-                title="Row- {{row_data}}, Rack- {{rack_data}}"
-              />
+              <img class="table-cell" src="../static/images/empty.png" alt="Row- {{row_data}}, Rack- {{rack_data}}"
+                title="Row- {{row_data}}, Rack- {{rack_data}}" />
               {% endif %} {% set count.value = count.value + 1 %}
             </a>
           </td>
           {% endfor %} {% else %} {% for rack_data in range(0, 19) %}
           <td scope="row">
-            <a
-              href="/one-row-rack-details/{{row_data}}/{{rack_data}}"
-              target="_blank"
-            >
+            <a href="/one-row-rack-details/{{row_data}}/{{rack_data}}" target="_blank">
               {% if rack_details[count.value] == 'RailTel Internal' %}
-              <img
-                class="table-cell"
-                src="../static/images/railtel_internal.png"
-                alt="Row- {{row_data}}, Rack- {{rack_data}}"
-                title="Row- {{row_data}}, Rack- {{rack_data}}"
-              />
+              <img class="table-cell" src="../static/images/railtel_internal.png"
+                alt="Row- {{row_data}}, Rack- {{rack_data}}" title="Row- {{row_data}}, Rack- {{rack_data}}" />
               {% elif rack_details[count.value] == 'Colocation' %}
-              <img
-                class="table-cell"
-                src="../static/images/colocation.png"
-                alt="Row- {{row_data}}, Rack- {{rack_data}}"
-                title="Row- {{row_data}}, Rack- {{rack_data}}"
-              />
+              <img class="table-cell" src="../static/images/colocation.png" alt="Row- {{row_data}}, Rack- {{rack_data}}"
+                title="Row- {{row_data}}, Rack- {{rack_data}}" />
               {% elif rack_details[count.value] == 'Network Asset' %}
-              <img
-                class="table-cell"
-                src="../static/images/network.png"
-                alt="Row- {{row_data}}, Rack- {{rack_data}}"
-                title="Row- {{row_data}}, Rack- {{rack_data}}"
-              />
+              <img class="table-cell" src="../static/images/network.png" alt="Row- {{row_data}}, Rack- {{rack_data}}"
+                title="Row- {{row_data}}, Rack- {{rack_data}}" />
               {% else %}
-              <img
-                class="table-cell"
-                src="../static/images/empty.png"
-                alt="Row- {{row_data}}, Rack- {{rack_data}}"
-                title="Row- {{row_data}}, Rack- {{rack_data}}"
-              />
+              <img class="table-cell" src="../static/images/empty.png" alt="Row- {{row_data}}, Rack- {{rack_data}}"
+                title="Row- {{row_data}}, Rack- {{rack_data}}" />
               {% endif %} {% set count.value = count.value + 1 %}
             </a>
           </td>
@@ -221,163 +129,59 @@ block main %}
 
 <div class="row px-md-3" style="margin-right: 1.2rem; margin-left: 1.2rem">
   <div class="col-sm-9 col-md-9 col-lg-9 col-9 px-0">
-    <span style="font-size: 1.3rem"
-      >Data Center Management <strong>Details</strong></span
-    >
+    <span style="font-size: 1.3rem">Data Center Management <strong>Details</strong></span>
   </div>
   <div class="col-sm-3 col-md-3 col-lg-3 col-3 px-0">
-    <a
-      class="btn px-0 mx-0 btn-talos add-new float-end"
-      href="/addDatacenter"
-      role="button"
-      ><i class="fa fa-plus"></i>Add New</a
-    >
+    <a class="btn px-0 mx-0 btn-talos add-new float-end" href="/addDatacenter" role="button"><i
+        class="fa fa-plus"></i>Add New</a>
   </div>
 </div>
-<div
-  class="btn"
-  id="displaymessage"
-  style="
+<div class="btn" id="displaymessage" style="
     display: none;
     width: 1100px;
     margin-top: 10px;
     background-color: #2980b9;
     color: #edf9fe;
-  "
-></div>
+  "></div>
 
 <br clear="all" />
 
-<div style="margin-bottom: 20px; overflow-x: scroll; height: 80vh">
-  <!-- <div style="margin-bottom: 50px; width: 100%;"> -->
-  <!-- <div style="overflow-x:scroll; margin-bottom: 50px;width: 100%;"> -->
+<div style="margin-bottom: 50px; width: 100%">
   <table class="reportTable2 mb-3">
-    <thead style="position: sticky; top: 0; background-color: #ccecf9">
+    <thead style="background-color: #ccecf9; height: 40px; position: sticky; top: 80px">
       <tr>
-        <th
-          scope="col"
-          style="min-width: 120px; padding-left: 5px"
-          class="tableHead ps-2"
-        >
+        <th scope="col" style="padding-left: 5px" class="tableHead columnSize90px">
           Rack Details
         </th>
-        <th
-          scope="col"
-          style="min-width: 100px; padding-left: 5px"
-          class="tableHead"
-        >
+        <th scope="col" style="padding-left: 5px" class="tableHead columnSize100px">
           Service Type
         </th>
-        <th
-          scope="col"
-          style="min-width: 160px; padding-left: 5px"
-          class="tableHead"
-        >
+        <th scope="col" style="padding-left: 5px" class="tableHead columnSize110px">
           Customer Name
         </th>
-        <th
-          scope="col"
-          style="min-width: 130px; padding-left: 5px"
-          class="tableHead"
-        >
-          Customer Project
+        <th scope="col" style="padding-left: 5px" class="tableHead columnSize130px">
+          Customer/Project
         </th>
-        <th
-          scope="col"
-          style="min-width: 110px; padding-left: 5px"
-          class="tableHead"
-        >
+        <th scope="col" class="tableHead columnSize110px"">
           CI Type
         </th>
         <th
-          scope="col"
-          style="min-width: 120px; padding-left: 5px"
-          class="tableHead"
-        >
+          scope=" col" style="padding-left: 5px" class="tableHead columnSize110px">
           Asset Tag
         </th>
-        <th
-          scope="col"
-          style="min-width: 100px; padding-left: 5px"
-          class="tableHead"
-        >
+        <th scope="col" style="padding-left: 5px" class="tableHead columnSize85px">
           OEM
         </th>
-        <th
-          scope="col"
-          style="min-width: 130px; padding-left: 5px"
-          class="tableHead"
-        >
+        <th scope="col" style="padding-left: 5px" class="tableHead columnSize110px">
           Model
         </th>
-        <th
-          scope="col"
-          style="min-width: 135px; padding-left: 5px"
-          class="tableHead"
-        >
+        <th scope="col" style="padding-left: 5px" class="tableHead columnSize110px">
           Serial Number
         </th>
-        <th
-          scope="col"
-          style="min-width: 110px; padding-left: 5px"
-          class="tableHead"
-        >
-          Hostname
-        </th>
-        <th
-          scope="col"
-          style="min-width: 110px; padding-left: 5px"
-          class="tableHead"
-        >
+        <th scope="col" style="padding-left: 5px" class="tableHead columnSize100px">
           IP (Mgmt)
         </th>
-        <th
-          scope="col"
-          style="min-width: 110px; padding-left: 5px"
-          class="tableHead"
-        >
-          IPMI ILO
-        </th>
-        <th
-          scope="col"
-          style="min-width: 120px; padding-left: 5px"
-          class="tableHead"
-        >
-          AMC Start Date
-        </th>
-        <th
-          scope="col"
-          style="min-width: 120px; padding-left: 5px"
-          class="tableHead"
-        >
-          AMC End Date
-        </th>
-        <th
-          scope="col"
-          style="min-width: 300px; padding-left: 5px"
-          class="tableHead"
-        >
-          Remark
-        </th>
-        <th
-          scope="col"
-          style="min-width: 140px; padding-left: 5px"
-          class="tableHead"
-        >
-          Created By
-        </th>
-        <th
-          scope="col"
-          style="min-width: 170px; padding-left: 5px"
-          class="tableHead"
-        >
-          Creation Date Time
-        </th>
-        <th
-          scope="col"
-          style="min-width: 100px; padding-left: 5px"
-          class="tableHead pe-2"
-        >
+        <th scope="col" style="min-width: 120px; padding-left: 5px" class="tableHead pe-2">
           Actions
         </th>
       </tr>
@@ -385,44 +189,26 @@ block main %}
     <tbody id="myTbody2">
       {% for row in data %}
       <tr class="tableRow">
-        <td class="tableData">Row-{{row.row}}, Rack-{{row.rack}}</td>
-        <td class="tableData">{{row.service_type}}</td>
-        <td class="tableData">{{row.customer_name}}</td>
-        <td class="tableData">{{row.customer_project}}</td>
-        <td class="tableData">{{row.ci_type}}</td>
-        <td class="tableData">{{row.asset_tag}}</td>
-        <td class="tableData">{{row.oem}}</td>
-        <td class="tableData">{{row.model}}</td>
-        <td class="tableData">{{row.serial_number}}</td>
-        <td class="tableData">{{row.hostname}}</td>
-        <td class="tableData">{{row.ip_mgmt}}</td>
-        <td class="tableData">{{row.ipmi_ilo}}</td>
-        <td class="tableData">{{row.amc_start_date}}</td>
-        <td class="tableData">{{row.amc_end_date}}</td>
-        <td class="tableData">{{row.remark}}</td>
-        <td class="tableData">{{row.created_by}}</td>
-        <td class="tableData">{{row.creation_date_time}}</td>
-        <td class="tableData pe-2">
-          <a class="add" title="Add" data-toggle="tooltip" id="{{row.SNo}}"
-            ><i class="fa-solid fa-user-plus" style="color: #27c46b"></i
-          ></a>
+        <td class="tableData columnSize90px">
+          Row-{{row.row}}, Rack-{{row.rack}}
+        </td>
+        <td class="tableData columnSize100px">{{row.service_type}}</td>
+        <td class="tableData columnSize110px">{{row.customer_name}}</td>
+        <td class="tableData columnSize130px">{{row.customer_project}}</td>
+        <td class="tableData columnSize110px">{{row.ci_type}}</td>
+        <td class="tableData columnSize110px">{{row.asset_tag}}</td>
+        <td class="tableData columnSize85px">{{row.oem}}</td>
+        <td class="tableData columnSize110px">{{row.model}}</td>
+        <td class="tableData columnSize110px">{{row.serial_number}}</td>
+        <td class="tableData columnSize100px">{{row.ip_mgmt}}</td>
+        <td class="tableData pe-1 text-center" style="min-width: 120px;">
           <a
-            href="/updateDataCenter/{{row.SNo}}"
-            class="edit"
-            title="Edit"
-            data-toggle="tooltip"
-            id="{{row.SNo}}"
-            ><i class="fa-solid fa-pencil"></i
-          ></a>
-          <a
-            class="delete"
-            title="Delete"
-            data-toggle="tooltip"
-            id="{{row.SNo}}"
-            about="Elephant"
-            onclick="return confirmation(this);"
-            ><i class="fa-solid fa-trash"></i
-          ></a>
+            onclick='swal("CI Type - {{row.ci_type}}\n\n Hostname - {{row.hostname}}\n\n IPMI ILO - {{row.ipmi_ilo}}\n\n AMC Start Date - {{row.amc_start_date}}\n\n AMC End Date - {{row.amc_end_date}}\n\n Remark - {{row.remark}}\n\n Created By - {{row.created_by}}\n\n Creation Date Time - {{row.creation_date_time}}", {buttons: false}); return false;'><img
+              src="../static/icons/viewIcon.svg" alt="view icon"></a>
+          <a href="/updateDataCenter/{{row.SNo}}" class="edit" title="Edit" data-toggle="tooltip" id="{{row.SNo}}"><img
+              src="../static/icons/editIcon.svg" alt="edit icons"></a>
+          <a class="delete" title="Delete" data-toggle="tooltip" id="{{row.SNo}}" about="Elephant"
+            onclick="return confirmation(this);"><img src="../static/icons/deleteIcon.svg" alt="delete Icon"> </a>
         </td>
       </tr>
       {% endfor %}

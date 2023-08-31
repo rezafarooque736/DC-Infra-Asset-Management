@@ -1,12 +1,13 @@
 {% extends 'base.html' %} {% block title %}RailTel | Deleted Data{% endblock %} {% block main %}
 
-<header class="p-0 px-md-4 border-bottom" style="background-color: #ccecf9">
+<header class="p-0 px-md-4 border-bottom" style="background-color: #ccecf9; position: sticky; top: 0">
 	<div class="container-fluid">
 		<div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
-			<a class="navbar-brand" href="/"><img src="/static/images/railtel-logo-vertical.png" alt="RailTel" width="50px" height="70px" class="d-inline-block align-text-top" /></a>
+			<a class="navbar-brand" href="/"><img src="/static/images/railtel-logo-vertical.png" alt="RailTel" width="50px"
+					height="70px" class="d-inline-block align-text-top" /></a>
 
 			<ul class="nav col-12 col-md-5 me-auto mb-2 justify-content-center mb-md-0" style="font-size: 19px; width: 533px">
-				<li><a href="/hardware-appliances-provisioning" class="header-list-text fw-bold homei">Home</a></li>
+				<li><a href="/login" class="header-list-text fw-bold homei">Home</a></li>
 				<li><a href="/loginHistory" class="header-list-text lh">Login History</a></li>
 				<li><a href="{{url_for('deleted_data')}}" class="header-list-text dd">Deleted Data</a></li>
 				<li class="nav-item dropdown float-end header-list-text dld">
@@ -24,17 +25,19 @@
 			</ul>
 
 			<div class="col-12 col-lg-auto mb-3 mb-lg-0 me-3" role="search">
-				<input id="myInput2" type="search" class="form-control" placeholder="Type here to Search..." aria-label="Search" name="search" />
+				<input id="myInput2" type="search" class="form-control" placeholder="Type here to Search..." aria-label="Search"
+					name="search" />
 			</div>
-			<a class="btn-talos text-end text-center mt-0" style="width: 110px; height: 40px" href="/logout" role="button">Sign out</a>
+			<a class="btn-talos text-end text-center mt-0" style="width: 110px; height: 40px" href="/logout"
+				role="button">Sign out</a>
 		</div>
 	</div>
 </header>
 <br clear="all" />
 
-<div style="overflow-x: auto; margin-bottom: 30px">
+<div style="margin-bottom: 50px; width: 100%">
 	<table class="reportTable2 mb-3">
-		<thead class="sticky-top">
+		<thead style="background-color: #ccecf9; height: 40px; position: sticky; top: 80px">
 			<tr>
 				<th scope="col" style="min-width: 60px" class="tableHead ps-2">Rack Details</th>
 				<th scope="col" style="min-width: 94px" class="tableHead text-start">Service Type</th>
@@ -46,7 +49,7 @@
 				<th scope="col" style="min-width: 130px" class="tableHead text-start">Serial Number</th>
 				<th scope="col" style="min-width: 110px" class="tableHead">IP (Mgmt)</th>
 				<th scope="col" style="min-width: 110px" class="tableHead">IPMI ILO</th>
-				<th scope="col" style="min-width: 90px" class="tableHead pe-0">Remaining</th>
+				<th scope="col" style="min-width: 90px" class="tableHead pe-0">More</th>
 			</tr>
 		</thead>
 
@@ -64,12 +67,8 @@
 				<td class="tableData">{{row.ip_mgmt}}</td>
 				<td class="tableData">{{row.ipmi_ilo}}</td>
 				<td class="tableData pe-1" style="text-align: center">
-					<a
-						class="btn-talos smallButton mx-0"
-						style="width: 80px"
-						onclick='swal("CI Type - {{row.ci_type}}\n\n Hostname - {{row.hostname}}\n\n AMC Start Date - {{row.amc_start_date}}\n\n AMC End Date - {{row.amc_end_date}}\n\n Old Remark - {{row.old_remark}}\n\n Deletion Reason - {{row.deletion_reason}}\n\n Deleted By - {{row.deleted_by}}\n\n Deletion Date Time - {{row.date_time}}", {buttons: false}); return false;'
-						>Remainig</a
-					>
+					<a class="btn-talos smallButton mx-0" style="width: 80px"
+						onclick='swal("CI Type - {{row.ci_type}}\n\n Hostname - {{row.hostname}}\n\n AMC Start Date - {{row.amc_start_date}}\n\n AMC End Date - {{row.amc_end_date}}\n\n Old Remark - {{row.old_remark}}\n\n Deletion Reason - {{row.deletion_reason}}\n\n Deleted By - {{row.deleted_by}}\n\n Deletion Date Time - {{row.date_time}}", {buttons: false}); return false;'>more</a>
 				</td>
 			</tr>
 			{% endfor %}

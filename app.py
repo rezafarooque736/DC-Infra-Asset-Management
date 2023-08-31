@@ -135,7 +135,7 @@ def login():
                     )
                     connection.commit()
                     # return redirect(url_for('index'))
-                    return redirect(url_for("hardware_appliances_provisioning"))
+                    return redirect(url_for("login"))
                 else:
                     # Account doesnt exist or username/password incorrect
                     flash("Incorrect username/password")
@@ -251,7 +251,7 @@ def register(token):
                         f'INSERT INTO "login_history" ("fullname", "mobile_number", "email", "Date_Time") VALUES(\'{account[1]}\',\'{account[2]}\',\'{account[3]}\',\'{date_time}\')'
                     )
                     connection.commit()
-                    return redirect(url_for("hardware_appliances_provisioning"))
+                    return redirect(url_for("login"))
                 cursor.close()
                 connection.close()
                 flash("Your password updated successfully", "success")
@@ -331,7 +331,7 @@ def reset(token):
                 connection.close()
                 flash("Your password updated successfully", "success")
                 # return redirect('/login')
-                return redirect(url_for("hardware_appliances_provisioning"))
+                return redirect(url_for("login"))
             else:
                 flash("your token has expired", "danger")
                 return redirect("/")
@@ -349,28 +349,10 @@ def logout():
             del session["name"]
         # Redirect to login page
         # return redirect(url_for('index'))
-        return redirect(url_for("hardware_appliances_provisioning"))
+        return redirect(url_for("login"))
     else:
         # return redirect(url_for('index'))
-        return redirect(url_for("hardware_appliances_provisioning"))
-
-
-#! one-row-rack-data
-
-
-@app.route("/hardware-appliances-provisioning")
-def hardware_appliances_provisioning():
-    # Check if user is loggedin
-    if "loggedin" in session:
-        # User is loggedin show them the Logged in home page
-        return redirect(url_for("showAll_datacenter"))
-    else:
-        data1, rack_details = rack_details_image_data()
-        return render_template(
-            "hardware_appliances_provisioning.html",
-            data=data1,
-            rack_details=rack_details,
-        )
+        return redirect(url_for("login"))
 
 
 @app.route("/one-row-rack-details/<int:row>/<int:rack>")
@@ -397,7 +379,7 @@ def showAll_datacenter():
         )
     else:
         # return redirect(url_for('index'))
-        return redirect(url_for("hardware_appliances_provisioning"))
+        return redirect(url_for("login"))
 
 
 @app.route("/deleted-data", methods=["GET", "POST"])
@@ -413,7 +395,7 @@ def deleted_data():
         return render_template("deleted_data.html", data=data1)
     else:
         # return redirect(url_for('index'))
-        return redirect(url_for("hardware_appliances_provisioning"))
+        return redirect(url_for("login"))
 
 
 @app.route("/loginHistory")
@@ -427,7 +409,7 @@ def loginHistory():
         return render_template("login_history.html", user_details=user_details)
     else:
         # return redirect(url_for('index'))
-        return redirect(url_for("hardware_appliances_provisioning"))
+        return redirect(url_for("login"))
 
 
 # add new row from showAll daatcenter configuration
@@ -510,7 +492,7 @@ def add_datacenter():
         return render_template("addDatacenter.html")
     else:
         # return redirect(url_for('index'))
-        return redirect(url_for("hardware_appliances_provisioning"))
+        return redirect(url_for("login"))
 
 
 @app.route("/updateDataCenter/<int:sno1>", methods=["GET", "POST"])
@@ -572,7 +554,7 @@ def updateRailTel(sno1):
         return render_template("updateDataCenter.html", sno1=sno1)
     else:
         # return redirect(url_for('index'))
-        return redirect(url_for("hardware_appliances_provisioning"))
+        return redirect(url_for("login"))
 
 
 #! getdatabaseRailTel
@@ -611,7 +593,7 @@ def getdatabaseDatacenter():
             return jsonify(data)
     else:
         # return redirect(url_for('index'))
-        return redirect(url_for("hardware_appliances_provisioning"))
+        return redirect(url_for("login"))
 
 
 #! deleteRailwaySupport
@@ -693,7 +675,7 @@ def deleteDataCenter(sl_no, reason):
         return redirect(url_for("showAll_datacenter"))
     else:
         # return redirect(url_for('index'))
-        return redirect(url_for("hardware_appliances_provisioning"))
+        return redirect(url_for("login"))
 
 
 #! /downloadRailwaySupport
