@@ -1,104 +1,166 @@
-{% extends 'base.html' %} {% block title %}RailTel | Row- {{row_rack_data[0][1]}} Rack- {{row_rack_data[0][2]}}{%
-endblock %} {% block main %}
+{% extends 'base.html' %} {% block title %}RailTel | Row-
+{{row_rack_data[0][1]}} Rack- {{row_rack_data[0][2]}}{% endblock %} {% block
+main %}
 
 <header class="p-0 px-md-4 border-bottom" style="background-color: #ccecf9">
-	<div class="container-fluid">
-		<div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
-			<a class="navbar-brand" href="/"><img src="/static/images/railtel-logo-vertical.png" alt="RailTel" width="50px"
-					height="70px" class="d-inline-block align-text-top" /></a>
-			<ul class="nav col-12 col-md-5 me-auto mb-2 justify-content-center mb-md-0" style="font-size: 19px; width: 250px">
-				<li><a href="/login" class="header-list-text fw-bold homei">Home</a></li>
-				<!-- <li><a href="/loginHistory" class="header-list-text lh">Login History</a></li> -->
-				<!-- <li><a href="{{url_for('deleted_data')}}" class="header-list-text dd">Deleted Data</a></li> -->
-				<li class="nav-item dropdown float-end header-list-text dld">
-					Download
-					<div class="dropdown-content text-start">
-						<a href="/download-dc-all/0">Data Center (All)</a>
-						<a href="/download-dc-all/1">Row 1 (only)</a>
-						<a href="/download-dc-all/2">Row 2 (only)</a>
-						<a href="/download-dc-all/3">Row 3 (only)</a>
-						<a href="/download-dc-all/4">Row 4 (only)</a>
-						<a href="/download-dc-all/5">Row 5 (only)</a>
-						<a href="/download-dc-all/6" class="mb-2">Row 6 (only)</a>
-					</div>
-				</li>
-			</ul>
+  <div class="container-fluid">
+    <div
+      class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start"
+    >
+      <a class="navbar-brand" href="/"
+        ><img
+          src="/static/images/railtel-logo-vertical.png"
+          alt="RailTel"
+          width="50px"
+          height="70px"
+          class="d-inline-block align-text-top"
+      /></a>
+      <ul
+        class="nav col-12 col-md-5 me-auto mb-2 justify-content-center mb-md-0"
+        style="font-size: 19px; width: 250px"
+      >
+        <li>
+          <a href="/login" class="header-list-text fw-bold homei">Home</a>
+        </li>
 
-			<div class="col-12 col-lg-auto mb-3 mb-lg-0" role="search">
-				<input id="myInput2" type="search" class="form-control" placeholder="Type here to Search..." aria-label="Search"
-					name="search" />
-			</div>
-			<a href="{{ url_for('newUser') }}" class="sign-up-home-page mx-3">Sign up</a>
-			<a class="btn-talos text-end text-center mt-0" style="width: 110px; height: 40px" href="/login" role="button">Sign
-				in</a>
-		</div>
-	</div>
+        <li class="nav-item dropdown float-end header-list-text dld">
+          Download
+          <div class="dropdown-content text-start">
+            <a href="/download-dc-all/0">Data Center (All)</a>
+            <a href="/download-dc-all/1">Row 1 (only)</a>
+            <a href="/download-dc-all/2">Row 2 (only)</a>
+            <a href="/download-dc-all/3">Row 3 (only)</a>
+            <a href="/download-dc-all/4">Row 4 (only)</a>
+            <a href="/download-dc-all/5">Row 5 (only)</a>
+            <a href="/download-dc-all/6" class="mb-2">Row 6 (only)</a>
+          </div>
+        </li>
+      </ul>
+
+      <div class="col-12 col-lg-auto mb-3 mb-lg-0 me-3" role="search">
+        <input
+          id="myInput2"
+          type="search"
+          class="form-control"
+          placeholder="Type here to Search..."
+          aria-label="Search"
+          name="search"
+        />
+      </div>
+      <a
+        class="btn-talos text-end text-center mt-0"
+        style="width: 110px; height: 40px"
+        href="/logout"
+        role="button"
+        >Sign out</a
+      >
+    </div>
+  </div>
 </header>
 <br clear="all" />
 
-<span style="display: flex; align-items: center; justify-content: center; font-size: 1.5rem; font-weight: 600">Data
-	Center Row - {{row_rack_data[0][1]}} and Rack - {{row_rack_data[0][2]}} Details</span>
+<span
+  style="
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    font-weight: 600;
+  "
+  >Data Center Row - {{row_rack_data[0][1]}} and Rack - {{row_rack_data[0][2]}}
+  Details</span
+>
 <br clear="all" />
 
 <div style="margin-bottom: 50px; width: 98vw">
-	<!-- <div style="overflow-x:scroll; margin-bottom: 50px;"> -->
-	<table class="reportTable2 mb-3">
-		<thead class="sticky-top" style="background-color: #def2fa">
-			<tr>
-				<th scope="col" style="min-width: 127px" class="tableHead ps-2">Rack Details</th>
-				<th scope="col" style="min-width: 100px" class="tableHead">Service Type</th>
-				<th scope="col" style="min-width: 130px" class="tableHead">Customer Name</th>
-				<th scope="col" style="min-width: 130px" class="tableHead">Customer/Project</th>
-				<th scope="col" style="min-width: 80px" class="tableHead">CI Type</th>
-				<th scope="col" style="min-width: 120px" class="tableHead">Asset Tag</th>
-				<th scope="col" style="min-width: 100px" class="tableHead">OEM</th>
-				<th scope="col" style="min-width: 130px" class="tableHead">Model</th>
-				<th scope="col" class="tableHead columnSize130px">Serial Number</th>
-				<th scope="col" style="min-width: 110px" class="tableHead">Hostname</th>
-				<th scope="col" class="tableHead columnSize130px">IP (Mgmt)</th>
-				<th scope="col" style="min-width: 110px" class="tableHead">IPMI ILO</th>
-				<th scope="col" style="min-width: 110px" class="tableHead">AMC Start Date</th>
-				<th scope="col" style="min-width: 110px" class="tableHead">AMC End Date</th>
-				<th scope="col" style="min-width: 140px; padding-left: 5px" class="tableHead">Created By</th>
-				<th scope="col" style="min-width: 170px; padding-left: 5px" class="tableHead">Creation Date Time</th>
-				<th scope="col" style="min-width: 350px" class="tableHead pe-2">Remark</th>
-			</tr>
-		</thead>
-		<tbody id="myTbody2">
-			{% for row in row_rack_data %}
-			<tr class="tableRow">
-				<td class="tableData ps-2">{{ loop.index }}. Row-{{row[1]}}, Rack-{{row[2]}}</td>
-				<td class="tableData">{{row[3]}}</td>
-				<td class="tableData">{{row[4]}}</td>
-				<td class="tableData">{{row[5]}}</td>
-				<td class="tableData">{{row[6]}}</td>
-				<td class="tableData">{{row[7]}}</td>
-				<td class="tableData">{{row[8]}}</td>
-				<td class="tableData">{{row[9]}}</td>
-				<td class="tableData columnSize130px">{{row[10]}}</td>
-				<td class="tableData">{{row[11]}}</td>
-				<td class="tableData columnSize130px">{{row[12]}}</td>
-				<td class="tableData">{{row[13]}}</td>
-				<td class="tableData">{{row[14]}}</td>
-				<td class="tableData">{{row[15]}}</td>
-				<td class="tableData">{{row.created_by}}</td>
-				<td class="tableData">{{row.creation_date_time}}</td>
-				<td class="tableData pe-2">{{row[16]}}</td>
-			</tr>
-			{% endfor %}
-		</tbody>
-	</table>
+  <!-- <div style="overflow-x:scroll; margin-bottom: 50px;"> -->
+  <table class="reportTable2 mb-3">
+    <thead class="sticky-top" style="background-color: #def2fa">
+      <tr>
+        <th scope="col" style="min-width: 127px" class="tableHead ps-2">
+          Rack Details
+        </th>
+        <th scope="col" style="min-width: 100px" class="tableHead">
+          Service Type
+        </th>
+        <th scope="col" style="min-width: 130px" class="tableHead">
+          Customer Name
+        </th>
+        <th scope="col" style="min-width: 130px" class="tableHead">
+          Customer/Project
+        </th>
+        <th scope="col" style="min-width: 80px" class="tableHead">CI Type</th>
+        <th scope="col" style="min-width: 120px" class="tableHead">
+          Asset Tag
+        </th>
+        <th scope="col" style="min-width: 100px" class="tableHead">OEM</th>
+        <th scope="col" style="min-width: 130px" class="tableHead">Model</th>
+        <th scope="col" class="tableHead columnSize130px">Serial Number</th>
+        <th scope="col" style="min-width: 110px" class="tableHead">Hostname</th>
+        <th scope="col" class="tableHead columnSize130px">IP (Mgmt)</th>
+        <th scope="col" style="min-width: 110px" class="tableHead">IPMI ILO</th>
+        <th scope="col" style="min-width: 110px" class="tableHead">
+          AMC Start Date
+        </th>
+        <th scope="col" style="min-width: 110px" class="tableHead">
+          AMC End Date
+        </th>
+        <th
+          scope="col"
+          style="min-width: 140px; padding-left: 5px"
+          class="tableHead"
+        >
+          Created By
+        </th>
+        <th
+          scope="col"
+          style="min-width: 170px; padding-left: 5px"
+          class="tableHead"
+        >
+          Creation Date Time
+        </th>
+        <th scope="col" style="min-width: 350px" class="tableHead pe-2">
+          Remark
+        </th>
+      </tr>
+    </thead>
+    <tbody id="myTbody2">
+      {% for row in row_rack_data %}
+      <tr class="tableRow">
+        <td class="tableData ps-2">
+          {{ loop.index }}. Row-{{row[1]}}, Rack-{{row[2]}}
+        </td>
+        <td class="tableData">{{row[3]}}</td>
+        <td class="tableData">{{row[4]}}</td>
+        <td class="tableData">{{row[5]}}</td>
+        <td class="tableData">{{row[6]}}</td>
+        <td class="tableData">{{row[7]}}</td>
+        <td class="tableData">{{row[8]}}</td>
+        <td class="tableData">{{row[9]}}</td>
+        <td class="tableData columnSize130px">{{row[10]}}</td>
+        <td class="tableData">{{row[11]}}</td>
+        <td class="tableData columnSize130px">{{row[12]}}</td>
+        <td class="tableData">{{row[13]}}</td>
+        <td class="tableData">{{row[14]}}</td>
+        <td class="tableData">{{row[15]}}</td>
+        <td class="tableData">{{row.created_by}}</td>
+        <td class="tableData">{{row.creation_date_time}}</td>
+        <td class="tableData pe-2">{{row[16]}}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
 </div>
 <br clear="all" />
 
 <script>
-	$(document).ready(function () {
-		$("#myInput2").on("keyup", function () {
-			var value = $(this).val().toLowerCase();
-			$("#myTbody2 tr").filter(function () {
-				$(this).toggle($(this).text().toLowerCase().indexOf(value) > -1);
-			});
-		});
-	});
+  $(document).ready(function () {
+    $("#myInput2").on("keyup", function () {
+      var value = $(this).val().toLowerCase();
+      $("#myTbody2 tr").filter(function () {
+        $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1);
+      });
+    });
+  });
 </script>
 {% endblock %}

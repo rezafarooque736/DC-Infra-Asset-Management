@@ -355,8 +355,8 @@ def logout():
         return redirect(url_for("login"))
 
 
-@app.route("/one-row-rack-details/<int:row>/<int:rack>")
-def one_row_rack_details(row, rack):
+@app.route("/one-row-rack-details/<int:row>/<int:rack>/<string:display_type>")
+def one_row_rack_details(row, rack, display_type):
     con()
     try:
         sql_code1 = 'SELECT * FROM dc_infra_table WHERE "row" = %s AND "rack" = %s;'
@@ -365,6 +365,9 @@ def one_row_rack_details(row, rack):
         data = cursor.fetchall()
         cursor.close()
         connection.close()
+        print(jsonify(data))
+        if display_type == "hovered":
+            return jsonify({'data':data, 'name1':'reza'})
         return render_template("one_row_rack_details.html", row_rack_data=data)
     except:
         return render_template("error.html", row=row, rack=rack)
