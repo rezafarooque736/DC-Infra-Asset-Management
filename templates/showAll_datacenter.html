@@ -68,151 +68,164 @@ block main %}
 </header>
 <br clear="all" />
 
-<div style="width: 90vw" class="mx-auto">
+<div class="mx-auto">
   <div style="text-align: center; margin-bottom: 15px">
     <strong style="font-size: 1.5rem">GGN DC - Server Farm</strong>
     <!-- <strong style="font-size: 1.5rem;">Gurgaon Data Center - Server Farm</strong> -->
   </div>
-  <div class="reportTable1">
-    <div class="table-photo-descp-main">
-      <div class="table-photo-descp">
-        <span>RailTel Internal &nbsp;=&nbsp;</span>
-        <img
-          class="table-cell"
-          src="../static/images/railtel_internal.png"
-          alt="RailTel Internal"
-          title="RailTel Internal"
-        />
+  <div class="d-flex justify-content-between">
+    <div class="reportTable1" style="width: 90vw">
+      <div class="table-photo-descp-main">
+        <div class="table-photo-descp">
+          <span>RailTel Internal &nbsp;=&nbsp;</span>
+          <img
+            class="table-cell"
+            src="../static/images/railtel_internal.png"
+            alt="RailTel Internal"
+            title="RailTel Internal"
+          />
+        </div>
+        <div class="table-photo-descp">
+          <span>Network Asset &nbsp;=&nbsp;</span>
+          <img
+            class="table-cell"
+            src="../static/images/network.png"
+            alt="Network Asset"
+            title="Network Asset"
+          />
+        </div>
+        <div class="table-photo-descp">
+          <span>Colocation &nbsp;=&nbsp;</span>
+          <img
+            class="table-cell"
+            src="../static/images/colocation.png"
+            alt="Colocation"
+            title="Colocation"
+          />
+        </div>
+        <div class="table-photo-descp">
+          <span>Empty &nbsp;=&nbsp;</span>
+          <img
+            class="table-cell"
+            src="../static/images/empty.png"
+            alt="Empty"
+            title="Empty"
+          />
+        </div>
       </div>
-      <div class="table-photo-descp">
-        <span>Network Asset &nbsp;=&nbsp;</span>
-        <img
-          class="table-cell"
-          src="../static/images/network.png"
-          alt="Network Asset"
-          title="Network Asset"
-        />
-      </div>
-      <div class="table-photo-descp">
-        <span>Colocation &nbsp;=&nbsp;</span>
-        <img
-          class="table-cell"
-          src="../static/images/colocation.png"
-          alt="Colocation"
-          title="Colocation"
-        />
-      </div>
-      <div class="table-photo-descp">
-        <span>Empty &nbsp;=&nbsp;</span>
-        <img
-          class="table-cell"
-          src="../static/images/empty.png"
-          alt="Empty"
-          title="Empty"
-        />
-      </div>
-    </div>
-    <table class="mt-3">
-      <thead>
-        <tr>
-          <th scope="col" style="width: 100px" class="tableHead"></th>
-          {% for rack in range(0,19) %}
-          <th
-            scope="col"
-            style="width: 100px; text-align: left"
-            class="tableHead"
-          >
-            Rack {{rack}}
-          </th>
-          {% endfor %}
-        </tr>
-      </thead>
+      <table class="mt-3">
+        <thead>
+          <tr>
+            <th scope="col" style="width: 100px" class="tableHead"></th>
+            {% for rack in range(0,19) %}
+            <th
+              scope="col"
+              style="width: 100px; text-align: left"
+              class="tableHead"
+            >
+              Rack {{rack}}
+            </th>
+            {% endfor %}
+          </tr>
+        </thead>
 
-      <tbody>
-        {% set count = namespace(value=0) %} {% for row_data in range(1, 7) %}
-        <tr class="row-border-bottom">
-          <th scdope="row" class="tableHead table-row">Row {{row_data}}</th>
-          {% if row_data == 3 %} {% for rack_data in range(0, 14) %}
-          <td scope="row">
-            <a
-              href="/one-row-rack-details/{{row_data}}/{{rack_data}}/when_click"
-              target="_blank"
-            >
-              {% if rack_details[count.value] == 'RailTel Internal' %}
-              <img
-                class="table-cell"
-                src="../static/images/railtel_internal.png"
-                alt="Row- {{row_data}}, Rack- {{rack_data}}"
-                title="Row- {{row_data}}, Rack- {{rack_data}}"
-              />
-              {% elif rack_details[count.value] == 'Colocation' %}
-              <img
-                class="table-cell"
-                src="../static/images/colocation.png"
-                alt="Row- {{row_data}}, Rack- {{rack_data}}"
-                title="Row- {{row_data}}, Rack- {{rack_data}}"
-              />
-              {% elif rack_details[count.value] == 'Network Asset' %}
-              <img
-                class="table-cell"
-                src="../static/images/network.png"
-                alt="Row- {{row_data}}, Rack- {{rack_data}}"
-                title="Row- {{row_data}}, Rack- {{rack_data}}"
-              />
-              {% else %}
-              <img
-                class="table-cell"
-                src="../static/images/empty.png"
-                alt="Row- {{row_data}}, Rack- {{rack_data}}"
-                title="Row- {{row_data}}, Rack- {{rack_data}}"
-              />
-              {% endif %} {% set count.value = count.value + 1 %}
-            </a>
-          </td>
-          {% endfor %} {% else %} {% for rack_data in range(0, 19) %}
-          <td scope="row">
-            <a
-              href="/one-row-rack-details/{{row_data}}/{{rack_data}}"
-              target="_blank"
-            >
-              {% if rack_details[count.value] == 'RailTel Internal' %}
-              <img
-                class="table-cell"
-                src="../static/images/railtel_internal.png"
-                alt="Row- {{row_data}}, Rack- {{rack_data}}"
-                title="Row- {{row_data}}, Rack- {{rack_data}}"
-              />
-              {% elif rack_details[count.value] == 'Colocation' %}
-              <img
-                class="table-cell"
-                src="../static/images/colocation.png"
-                alt="Row- {{row_data}}, Rack- {{rack_data}}"
-                title="Row- {{row_data}}, Rack- {{rack_data}}"
-              />
-              {% elif rack_details[count.value] == 'Network Asset' %}
-              <img
-                class="table-cell"
-                src="../static/images/network.png"
-                alt="Row- {{row_data}}, Rack- {{rack_data}}"
-                title="Row- {{row_data}}, Rack- {{rack_data}}"
-              />
-              {% else %}
-              <img
-                class="table-cell"
-                src="../static/images/empty.png"
-                alt="Row- {{row_data}}, Rack- {{rack_data}}"
-                title="Row- {{row_data}}, Rack- {{rack_data}}"
-              />
-              {% endif %} {% set count.value = count.value + 1 %}
-            </a>
-          </td>
-          {% endfor %} {% endif %}
-        </tr>
-        {% endfor %}
-      </tbody>
-    </table>
+        <tbody>
+          {% set count = namespace(value=0) %} {% for row_data in range(1, 7) %}
+          <tr class="row-border-bottom">
+            <th scdope="row" class="tableHead table-row">Row {{row_data}}</th>
+            {% if row_data == 3 %} {% for rack_data in range(0, 14) %}
+            <td scope="row">
+              <a
+                href="/one-row-rack-details/{{row_data}}/{{rack_data}}/when_click"
+                target="_blank"
+                onmouseover="loadInfo('{{row_data}}', '{{rack_data}}')"
+              >
+                {% if rack_details[count.value] == 'RailTel Internal' %}
+                <img
+                  class="table-cell"
+                  src="../static/images/railtel_internal.png"
+                  alt="Row- {{row_data}}, Rack- {{rack_data}}"
+                  title="Row- {{row_data}}, Rack- {{rack_data}}"
+                />
+                {% elif rack_details[count.value] == 'Colocation' %}
+                <img
+                  class="table-cell"
+                  src="../static/images/colocation.png"
+                  alt="Row- {{row_data}}, Rack- {{rack_data}}"
+                  title="Row- {{row_data}}, Rack- {{rack_data}}"
+                />
+                {% elif rack_details[count.value] == 'Network Asset' %}
+                <img
+                  class="table-cell"
+                  src="../static/images/network.png"
+                  alt="Row- {{row_data}}, Rack- {{rack_data}}"
+                  title="Row- {{row_data}}, Rack- {{rack_data}}"
+                />
+                {% else %}
+                <img
+                  class="table-cell"
+                  src="../static/images/empty.png"
+                  alt="Row- {{row_data}}, Rack- {{rack_data}}"
+                  title="Row- {{row_data}}, Rack- {{rack_data}}"
+                />
+                {% endif %} {% set count.value = count.value + 1 %}
+              </a>
+            </td>
+            {% endfor %} {% else %} {% for rack_data in range(0, 19) %}
+            <td scope="row">
+              <a
+                href="/one-row-rack-details/{{row_data}}/{{rack_data}}/when_click"
+                target="_blank"
+                onmouseover="loadInfo('{{row_data}}', '{{rack_data}}')"
+              >
+                {% if rack_details[count.value] == 'RailTel Internal' %}
+                <img
+                  class="table-cell"
+                  src="../static/images/railtel_internal.png"
+                  alt="Row- {{row_data}}, Rack- {{rack_data}}"
+                  title="Row- {{row_data}}, Rack- {{rack_data}}"
+                />
+                {% elif rack_details[count.value] == 'Colocation' %}
+                <img
+                  class="table-cell"
+                  src="../static/images/colocation.png"
+                  alt="Row- {{row_data}}, Rack- {{rack_data}}"
+                  title="Row- {{row_data}}, Rack- {{rack_data}}"
+                />
+                {% elif rack_details[count.value] == 'Network Asset' %}
+                <img
+                  class="table-cell"
+                  src="../static/images/network.png"
+                  alt="Row- {{row_data}}, Rack- {{rack_data}}"
+                  title="Row- {{row_data}}, Rack- {{rack_data}}"
+                />
+                {% else %}
+                <img
+                  class="table-cell"
+                  src="../static/images/empty.png"
+                  alt="Row- {{row_data}}, Rack- {{rack_data}}"
+                  title="Row- {{row_data}}, Rack- {{rack_data}}"
+                />
+                {% endif %} {% set count.value = count.value + 1 %}
+              </a>
+            </td>
+            {% endfor %} {% endif %}
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Add this inside the main block -->
+    <div id="infoBox" class="info-box" style="display: none">
+      <!-- Content will be loaded here using Ajax -->
+      <div id="infoContent"></div>
+      <!-- Close button -->
+      <span id="closeBtn" class="close-btn" onclick="closeInfoBox()">×</span>
+    </div>
   </div>
 </div>
+
 <br clear="all" />
 
 <div class="row px-md-3" style="margin-right: 1.2rem; margin-left: 1.2rem">
@@ -387,6 +400,89 @@ block main %}
     } else {
       return false;
     }
+  }
+</script>
+
+<!-- Add this inside the main block -->
+<script>
+  let ajaxRequest;
+
+  function loadInfo(row, rack) {
+    // Abort previous Ajax request if any
+    if (ajaxRequest) {
+      ajaxRequest.abort();
+    }
+
+    // Perform Ajax request
+    ajaxRequest = $.ajax({
+      type: "GET",
+      url: `/one-row-rack-details/${row}/${rack}/hovered`,
+      success: function (data) {
+        console.log(data);
+
+        // Clear previous content
+        $("#infoContent").empty();
+
+        // Define the order in which keys should be displayed
+        const keyOrder = [
+          "row",
+          "rack",
+          "service_type",
+          "customer_name",
+          "customer_project",
+          "ci_type",
+          "asset_tag",
+        ];
+
+        // Check if data is empty
+        if ($.isEmptyObject(data)) {
+          // Display a message for empty data
+          const emptyMessageElement = $("<p>", {
+            text: "Data is empty",
+            css: {
+              fontSize: "18px",
+              fontWeight: 700,
+              color: "#e34724",
+              textAlign: "center",
+            },
+          });
+
+          // Append the message to the infoContent
+          $("#infoContent").append(emptyMessageElement);
+        } else {
+          // Iterate through keys and values
+          keyOrder.forEach((key) => {
+            if (data[key]) {
+              // Create a single paragraph for both key and value
+              const keyValueElement = $("<p>", {
+                html: `<span style="font-size: 16px; font-weight: 600; margin-right: 5px;">${key}:</span><span style="font-size: 14px;">${data[
+                  key
+                ].join(", ")}</span>`,
+                css: {
+                  marginBottom: "15px",
+                },
+              });
+
+              // Append the key-value pair to the infoContent
+              $("#infoContent").append(keyValueElement);
+            }
+          });
+        }
+
+        // Show the infoBox
+        $("#infoBox").show();
+      },
+
+      error: function () {
+        // Handle error
+        console.log("Error fetching data");
+      },
+    });
+  }
+
+  function closeInfoBox() {
+    // Hide the infoBox
+    $("#infoBox").hide();
   }
 </script>
 

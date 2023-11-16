@@ -235,10 +235,10 @@ def register(token):
 
                 cursor.execute(f"SELECT * FROM users WHERE \"email\"='{email}';")
                 account = cursor.fetchone()
-                print(account)
+                # print(account)
 
                 password_from_db = account[5]
-                print(password_from_db)
+                # print(password_from_db)
 
                 if check_password_hash(password_from_db, password):
                     # Create session data, we can access this data in other routes
@@ -365,9 +365,26 @@ def one_row_rack_details(row, rack, display_type):
         data = cursor.fetchall()
         cursor.close()
         connection.close()
-        print(jsonify(data))
+        # print(jsonify(data))
         if display_type == "hovered":
-            return jsonify({'data':data, 'name1':'reza'})
+            result_dict = {}
+
+            # Specify the keys you want to include
+            keys_to_include = ['id','row', 'rack', 'service_type', 'customer_name', 'customer_project', 'ci_type', 'asset_tag']
+
+            for entry in data:
+                # Create a dictionary with relevant values
+                entry_dict = {key: entry[i] for i, key in enumerate(keys_to_include)}
+
+                # Update result_dict by appending values to sets
+                for key, value in entry_dict.items():
+                    result_dict.setdefault(key, set()).add(value)
+
+            # Convert sets to lists within the dictionary
+            result_dict = {key: list(values) for key, values in result_dict.items()}
+            
+            return result_dict
+            
         return render_template("one_row_rack_details.html", row_rack_data=data)
     except:
         return render_template("error.html", row=row, rack=rack)
