@@ -15,6 +15,7 @@ import psycopg2
 import psycopg2.extras
 import pandas as pd
 from flask.helpers import flash
+from werkzeug.utils import secure_filename
 import uuid
 from flask_mail import Mail, Message
 from dotenv import load_dotenv
@@ -25,6 +26,8 @@ load_dotenv()
 app = Flask(__name__)
 mail = Mail(app)
 app.config["SECRET_KEY"] = os.getenv("SECRET_KEY")
+UPLOAD_FOLDER = "temp_file"
+app.config["UPLOAD_FOLDER"] = UPLOAD_FOLDER
 
 # mail Configuration
 app.config["MAIL_SERVER"] = os.getenv("MAIL_SERVER")
@@ -42,7 +45,7 @@ def con():
     try:
         # establishing the connection
         connection = psycopg2.connect(
-            host=os.getenv("DB_HOST_SERVER"),
+            host=os.getenv("DB_HOST_LOCAL"),
             port=os.getenv("DB_PORT"),
             database=os.getenv("DB_NAME"),
             user=os.getenv("DB_USER"),
@@ -729,8 +732,103 @@ def downloadDcAll(row):
             "Content-Disposition": "attachment;filename=Railway_support_database.xlsx"
         },
     )
-    # return render_template('work_in_progress.html')
 
+@app.route("/upload-excel-data", methods=['GET', 'POST'])
+def uploadExcelData():
+    if "loggedin" in session:
+        redirect_html_file_to = "upload_excel_data.html"
+        if request.method == "POST":
+            con()
+            if "upload-file" not in request.files:
+                flash("No file part")
+                return redirect(request.url)
+            uploaded_file = request.files["upload-file"]
+            if uploaded_file.filename == "":
+                flash("No selected file")
+                return redirect(request.url)
+            if uploaded_file:
+                filename = secure_filename(uploaded_file.filename)
+                file_path = os.path.join(app.config["UPLOAD_FOLDER"], filename)
+                uploaded_file.save(file_path)
+                # Read the Excel file using openpyxl engine
+                df = pd.read_excel(file_path, engine='openpyxl')
+
+                # Fill NaN values in the DataFrame
+                df = df.fillna("")
+
+                now = datetime.now()
+                creation_date_time = now.strftime("%d/%m/%Y, %H:%M:%S")
+
+                for index, row in df.iterrows():
+                    row_num = row['row']
+                    rack = row['rack']
+                    service_type = row['service_type']
+                    customer_name = row['customer_name']
+                    customer_project = row['customer_project']
+                    ci_type = row['ci_type']
+                    asset_tag = row['asset_tag']
+                    oem = row['oem']
+                    model = row['model']
+                    serial_number = row['serial_number']
+                    hostname = row['hostname']
+                    ip_mgmt = row['ip_mgmt']
+                    ipmi_ilo = row['ipmi_ilo']
+                    amc_start_date = row['amc_start_date']
+                    amc_end_date = row['amc_end_date']
+                    created_by = row['created_by'] or session["name"]
+                    remark = row['remark'].replace("'", "`")
+
+                    # Check for mandatory fields
+                    if row_num == "":
+                        return render_template(redirect_html_file_to, message = "Please Input Row No", row_num = row_num, rack = rack, service_type=service_type)
+                    elif rack == "":
+                        return render_template(redirect_html_file_to, message = "Please Input rack No", row_num = row_num, rack = rack, service_type=service_type)
+                    elif service_type == "":
+                        return render_template(redirect_html_file_to, message = "Please Input Service Type", row_num = row_num, rack = rack, service_type=service_type)
+                    elif customer_name == "":
+                        return render_template(redirect_html_file_to, message = "Please Input Customer Name", row_num = row_num, rack = rack, service_type=service_type)
+                    elif customer_project == "":
+                        return render_template(redirect_html_file_to, message = "Please Input Customer Project", row_num = row_num, rack = rack, service_type=service_type)
+
+                    sql_code1 = 'SELECT "SNo" FROM dc_infra_table ORDER BY "SNo" DESC LIMIT 1;'
+                    cursor.execute(sql_code1)
+                    sl_no = cursor.fetchone()
+                    if sl_no is None:
+                        sl_no = 1
+                    else:
+                        sl_no = sl_no[0] + 1
+
+                    sql_code2 = 'INSERT INTO dc_infra_table("SNo", "row", "rack", "service_type", "customer_name", "customer_project", "ci_type", "asset_tag", "oem", "model", "serial_number", "hostname", "ip_mgmt", "ipmi_ilo", "amc_start_date", "amc_end_date", "remark", created_by, creation_date_time) VALUES(%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)'
+                    values2 = (
+                        sl_no,
+                        row_num,
+                        rack,
+                        service_type,
+                        customer_name,
+                        customer_project,
+                        ci_type,
+                        asset_tag,
+                        oem,
+                        model,
+                        serial_number,
+                        hostname,
+                        ip_mgmt,
+                        ipmi_ilo,
+                        amc_start_date,
+                        amc_end_date,
+                        remark,
+                        created_by,
+                        creation_date_time,
+                    )
+                    cursor.execute(sql_code2, values2)
+                    connection.commit()
+
+                cursor.close()
+                connection.close()
+                return render_template(redirect_html_file_to, message = "New records created successfully.")
+        return render_template(redirect_html_file_to)
+    else:
+        return redirect(url_for("login"))
 
 if __name__ == "__main__":
-    app.run(debug=False, host="0.0.0.0")
+    app.run(debug=True, host="0.0.0.0")
